@@ -45,8 +45,5 @@ export default {
       this.doVote(personageId);
     },
   },
-  created() {
-    console.log("peopleList:", this.peopleListArray);
-  },
 };
 </script>
