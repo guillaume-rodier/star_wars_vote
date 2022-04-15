@@ -12,9 +12,6 @@
         <v-list-item-title :class="['text-h5', 'mb-1']">
           {{ personage.name }}
         </v-list-item-title>
-        <v-list-item-subtitle>
-          {{ personage.pic }}
-        </v-list-item-subtitle>
       </v-list-item-content>
 
       <v-list-item-avatar tile size="80" color="grey">
@@ -24,7 +21,10 @@
 
     <v-card-actions :class="['px-4', 'pb-4']">
       <v-spacer />
-      <v-btn elevation="2" @click="voteFunction"> Vote for me ! </v-btn>
+      <h4 v-if="'numberOfVote' in personage">
+        Number of votes : {{ personage.numberOfVote }}
+      </h4>
+      <v-btn v-else elevation="2" @click="voteFunction"> Vote for me ! </v-btn>
     </v-card-actions>
   </v-card>
 </template>

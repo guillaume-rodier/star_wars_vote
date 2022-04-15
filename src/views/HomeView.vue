@@ -1,6 +1,11 @@
 <template>
   <v-container fluid>
     <v-row>
+      <v-col cols="12">
+        <h1 :class="['text-center']">List of candidates!</h1>
+      </v-col>
+    </v-row>
+    <v-row>
       <v-col
         cols="12"
         sm="6"

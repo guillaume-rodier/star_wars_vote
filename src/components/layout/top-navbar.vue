@@ -22,13 +22,39 @@
 
     <v-spacer />
 
-    <v-btn target="_blank" text @click="redirection('home')">
-      <span :class="['mr-2']" :style="sizeText">List of candidates</span>
-    </v-btn>
-    <v-btn target="_blank" text @click="redirection('vote')">
-      <span :class="['mr-2']" :style="sizeText">Famous candidates</span>
-    </v-btn>
+    <div v-if="$vuetify.breakpoint.mdAndUp">
+      <v-btn
+        v-for="(item, index) in listItems"
+        :key="index"
+        target="_blank"
+        text
+        @click="redirection(item.routeName)"
+      >
+        <span :class="['mr-2']" :style="sizeText">{{ item.text }}</span>
+      </v-btn>
+    </div>
+
     <v-spacer />
+
+    <v-menu
+      v-if="$vuetify.breakpoint.smAndDown"
+      top
+      :close-on-click="closeOnClick"
+    >
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn color="primary" dark v-bind="attrs" v-on="on"> Menu </v-btn>
+      </template>
+
+      <v-list>
+        <v-list-item
+          v-for="(item, index) in listItems"
+          :key="index"
+          @click="redirection(item.routeName)"
+        >
+          <v-list-item-title>{{ item.text }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
   </v-app-bar>
 </template>
 
@@ -46,8 +72,17 @@ export default {
   },
   methods: {
     redirection(routeName) {
-      this.$router.push({ name: routeName });
+      this.$router.push({ name: routeName }).catch(() => {});
     },
+  },
+  data() {
+    return {
+      closeOnClick: true,
+      listItems: [
+        { text: "List of candidates", routeName: "home" },
+        { text: "Famous candidates", routeName: "vote" },
+      ],
+    };
   },
 };
 </script>
