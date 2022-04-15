@@ -15,9 +15,9 @@ const routes = [
   },
   {
     path: "/results-vote",
-    name: "about",
+    name: "vote",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+      import(/* webpackChunkName: "vote" */ "../views/VoteView.vue"),
   },
 ];
 

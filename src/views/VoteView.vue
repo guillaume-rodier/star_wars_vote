@@ -1,12 +1,19 @@
 <template>
-  <v-container fluid>
+  <v-container fluid v-if="famousPeopleList.length == 0">
+    <v-row>
+      <v-col cols="12">
+        <h1 :class="['text-center']">No one is here!</h1>
+      </v-col>
+    </v-row>
+  </v-container>
+  <v-container fluid v-else>
     <v-row>
       <v-col
         cols="12"
         sm="6"
         md="4"
         lg="3"
-        v-for="(personage, index) in peopleListArray"
+        v-for="(personage, index) in famousPeopleList"
         :key="index"
       >
         <PeopleCardComponent
@@ -19,7 +26,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 import PeopleCardComponent from "@/components/PeopleCardComponent.vue";
 
 export default {
@@ -29,19 +36,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      peopleListArray: "starWars/getPeopleList",
+      famousPeopleList: "starWars/getFamousPeopleList",
     }),
-  },
-  methods: {
-    ...mapActions({
-      doVote: "starWars/doVote",
-    }),
-    voteFunction(personageId) {
-      this.doVote(personageId);
-    },
   },
   created() {
-    console.log("peopleList:", this.peopleListArray);
+    console.log("famousPeopleList:", this.famousPeopleList.length);
   },
 };
 </script>
